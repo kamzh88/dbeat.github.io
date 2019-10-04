@@ -10,18 +10,54 @@
 </head>
 
 <body>
+    <h1>The Physic Game</h1>
+    <h2>Guess What Letter I'm Thinking Of?</h2>
+
+    <p> Wins: <span id="wins-text"></span></p>
+    <p> Losses:<span id="loss-text"></span></p>
+    <p> Guess Left: <span id="guessleft-text"></span></p>
+    <p> Your Guesses So Far: <span id="user-text"></span></p>
 
 
+    <!-- <script src="assets/javascript/game.js"> -->
+    <script>
+        //naming all the choices the computer have
+        var computerChoices = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+
+        //computer is randomly choosing a letter
+        var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+        console.log(computerGuess);
+
+        var wins = 0;
+        var losses = 0;
+        var guessLeft = 10;
+
+        var winsText = document.getElementById("wins-text");
+        var userText = document.getElementById('user-text');
+        var guessLeftText = document.getElementById("guessleft-text");
+        var lossesText = document.getElementById("loss-text");
 
 
+        document.onkeyup = function(event) {
+            var text = event.key.toLowerCase();
 
-    <script src="assets/javascript/game.js">
+            if ((text === computerGuess)) {
+                wins++;  
+                
+            }
+            else if (userText != computerGuess && guessLeft > 0) {
+                guessLeft--;
+                
+            } 
+            else if (userText != computerGuess && guessLeft === 0) {
+                losses++
+            }
 
-
-
-
-
-
+            winsText.textContent = wins;
+            userText.innerHTML = userText.innerHTML + text + ' , ' ;
+            guessLeftText.textContent = guessLeft;
+            lossesText.textContent = losses;
+        }
 
     </script>
 
