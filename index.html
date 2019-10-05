@@ -49,29 +49,36 @@
         }
 
 
+
+        addEventListener("keydown", function (event) {
+            if (event.keyCode == 86)
+                document.body.style.background = "violet";
+        });
+
+
         document.onkeyup = function (event) {
-            var text = event.key.toLowerCase();
-   
-
-            console.log(text)
-
-    
+            if (event.keyCode >= 65 && event.keyCode <= 90) {
+                var text = event.key.toLowerCase();
+            
 
             if (textSoFar.includes(text)) {
-                alert("not again")
+
+                alert("You already guess that letter!")
+
             } else {
 
                 textSoFar.push(text)
                 userText.innerHTML = userText.innerHTML + text + ' , ';
+
                 //Incorrect Guesses
-                if (text != computerGuess && guessLeft > 0 && textSoFar != userText.innerHTML) {
+                if (text != computerGuess && guessLeft > 0 ) {
                     guessLeft--;
                 }
 
                 //Correct Guesses
                 if ((text === computerGuess)) {
-                    clear();
                     wins++;
+                    clear();
                     guessLeft = 10;
                 }
 
@@ -83,17 +90,12 @@
 
             }
 
-
-
-
-
-
-
             guessLeftText.textContent = guessLeft;
 
-        }
+        }};
 
         cGuess();
+
     </script>
 
 </body>
