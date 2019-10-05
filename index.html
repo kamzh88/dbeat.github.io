@@ -10,55 +10,90 @@
 </head>
 
 <body>
-    <h1>The Physic Game</h1>
+    <h1>The Psychic Game</h1>
     <h2>Guess What Letter I'm Thinking Of?</h2>
 
-    <p> Wins: <span id="wins-text"></span></p>
-    <p> Losses:<span id="loss-text"></span></p>
-    <p> Guess Left: <span id="guessleft-text"></span></p>
+    <p> Wins: <span id="wins-text">0</span></p>
+    <p> Losses: <span id="loss-text">0</span></p>
+    <p> Guess Left: <span id="guessleft-text">10</span></p>
     <p> Your Guesses So Far: <span id="user-text"></span></p>
 
 
     <!-- <script src="assets/javascript/game.js"> -->
     <script>
         //naming all the choices the computer have
-        var computerChoices = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+        var letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 
         //computer is randomly choosing a letter
-        var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
-        console.log(computerGuess);
+        function cGuess() {
+            computerGuess = letters[Math.floor(Math.random() * letters.length)];
+            console.log(computerGuess);
+        };
 
         var wins = 0;
         var losses = 0;
         var guessLeft = 10;
-
+        var textSoFar = []
         var winsText = document.getElementById("wins-text");
-        var userText = document.getElementById('user-text');
+        var userText = document.getElementById("user-text");
         var guessLeftText = document.getElementById("guessleft-text");
         var lossesText = document.getElementById("loss-text");
 
-
-        document.onkeyup = function(event) {
-            var text = event.key.toLowerCase();
-
-            if ((text === computerGuess)) {
-                wins++;  
-                
-            }
-            else if (userText != computerGuess && guessLeft > 0) {
-                guessLeft--;
-                
-            } 
-            else if (userText != computerGuess && guessLeft === 0) {
-                losses++
-            }
-
+        function clear() {
+            document.getElementById("user-text").innerHTML = "";
+            textSoFar = [];
+            guessLeft = 10;
             winsText.textContent = wins;
-            userText.innerHTML = userText.innerHTML + text + ' , ' ;
-            guessLeftText.textContent = guessLeft;
             lossesText.textContent = losses;
+            cGuess()
         }
 
+
+        document.onkeyup = function (event) {
+            var text = event.key.toLowerCase();
+   
+
+            console.log(text)
+
+    
+
+            if (textSoFar.includes(text)) {
+                alert("not again")
+            } else {
+
+                textSoFar.push(text)
+                userText.innerHTML = userText.innerHTML + text + ' , ';
+                //Incorrect Guesses
+                if (text != computerGuess && guessLeft > 0 && textSoFar != userText.innerHTML) {
+                    guessLeft--;
+                }
+
+                //Correct Guesses
+                if ((text === computerGuess)) {
+                    clear();
+                    wins++;
+                    guessLeft = 10;
+                }
+
+                //No more Guess Left
+                if (text != computerGuess && guessLeft === 0) {
+                    losses++
+                    clear()
+                }
+
+            }
+
+
+
+
+
+
+
+            guessLeftText.textContent = guessLeft;
+
+        }
+
+        cGuess();
     </script>
 
 </body>
