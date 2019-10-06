@@ -1,0 +1,14 @@
+.container{
+    text-align: center;
+    margin-top: 150px;
+}
+
+#image-text{
+    padding:60px;
+    text-align: center;
+    font-size: 40px;
+}
+
+body {
+    background-image: URL(../images/ep_naturalwhite.png);
+}
