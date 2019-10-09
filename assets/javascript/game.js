@@ -36,7 +36,7 @@ document.onkeyup = function (event) {
 
         if (textSoFar.includes(text)) {
 
-            imageText.textContent = ("You already guess that letter! Guess another letter!");
+            // imageText.textContent = ("You already guess that letter! Guess another letter!");
 
         } else {
 
@@ -56,6 +56,7 @@ document.onkeyup = function (event) {
                 clear();
                 guessLeft = 10;
                 imageText.textContent= ("You won!  Play again!!!")
+                // imageText.src= '/assets/images/win-tag.jpg'
 
             }
 
