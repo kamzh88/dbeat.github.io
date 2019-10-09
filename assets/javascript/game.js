@@ -15,8 +15,8 @@ var winsText = document.getElementById("wins-text");
 var userText = document.getElementById("user-text");
 var guessLeftText = document.getElementById("guessleft-text");
 var lossesText = document.getElementById("loss-text");
-var imageText = document.getElementById("image-text")
-
+var imageText = document.getElementById("image-text");
+var winnerText = document.getElementById("winner-text");
 
 function clear() {
     document.getElementById("user-text").innerHTML = "";
@@ -36,7 +36,7 @@ document.onkeyup = function (event) {
 
         if (textSoFar.includes(text)) {
 
-            // imageText.textContent = ("You already guess that letter! Guess another letter!");
+            imageText.textContent = ("You already guess that letter! Guess another letter!");
 
         } else {
 
@@ -47,7 +47,7 @@ document.onkeyup = function (event) {
             if (text != computerGuess && guessLeft > 0) {
                 guessLeft--;
                 imageText.textContent = ("Wrong Letter!  Try another!")
-                
+                winnerText.style.display= "none";
             }
 
             //Correct Guesses
@@ -55,14 +55,13 @@ document.onkeyup = function (event) {
                 wins++;
                 clear();
                 guessLeft = 10;
-                imageText.textContent= ("You won!  Play again!!!")
-                // imageText.src= '/assets/images/win-tag.jpg'
-
+                winnerText.style.display = "block";
+                imageText.textContent = ("Press a letter to start again!")
             }
 
             //No more Guess Left
             if (text != computerGuess && guessLeft === 0) {
-                imageText.textContent = ("You Lose!  I was thinking of letter " + computerGuess + "!");
+                imageText.textContent = ("You Lose!  I was thinking of letter " + computerGuess.toUpperCase() + "!");
                 losses++;
                 guessLeft--;
                 clear();

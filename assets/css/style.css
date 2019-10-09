@@ -12,3 +12,8 @@
 body {
     background-image: URL(../images/ep_naturalwhite.png);
 }
+
+#winner-text{
+    display: none;
+    margin-left: 105px;
+}
